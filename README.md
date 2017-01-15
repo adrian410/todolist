@@ -2,6 +2,7 @@ git clone git@github.com:adrian410/todolist.git
 
 For Windows
 
+mkdir todo
 
 virtualenv venv
 cd ./venv/Scripts/
