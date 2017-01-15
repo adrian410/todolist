@@ -17,3 +17,6 @@ cd ..
 Avec la console GIT FOR WINDOWS
 
 bower install
+
+python manage.py migrate
+
