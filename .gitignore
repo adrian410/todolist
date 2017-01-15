@@ -20,5 +20,5 @@ Include/
 /share
 /Lib
 /Include
-Scripts
+Scripts/*
 !Scripts/postInstall.sh
