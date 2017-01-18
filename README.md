@@ -20,3 +20,4 @@ bower install
 
 python manage.py migrate
 
+test
