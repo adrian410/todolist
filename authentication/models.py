@@ -1,9 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import BaseUserManager
-from django.http import HttpResponse
-import pprint
-
+from django.contrib.auth.models import PermissionsMixin
 
 class AccountManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
@@ -25,12 +23,13 @@ class AccountManager(BaseUserManager):
     def create_superuser(self, email, password, **kwargs):
         account = self.create_user(email, password, **kwargs)
 
-        account.is_admin = True
+        account.is_staff = True
+        account.is_superuser = True
         account.save()
 
         return account
 
-class Account(AbstractBaseUser):
+class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=40, unique=True)
 
@@ -38,7 +37,8 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=40, blank=True)
     tagline = models.CharField(max_length=140, blank=True)
 
-    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

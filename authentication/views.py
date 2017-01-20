@@ -4,8 +4,14 @@ from authentication.models import Account
 from authentication.permissions import IsAccountOwner
 from authentication.serializers import AccountSerializer
 from django.http import HttpResponseRedirect,HttpResponse
+from django.contrib.auth import authenticate, login,logout
+from rest_framework.response import Response
+
+from rest_framework import status, views
+from rest_framework.response import Response
 import pprint
 import sys, traceback
+import json
 
 
 class AccountViewSet(viewsets.ModelViewSet):
@@ -30,7 +36,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
             return HttpResponse(serializer.validated_data, status=201)
 
-        return HttpResponse({
+        return Response({
             'status': 'Bad request',
             'message': 'Account could not be created with received data.'
         }, status=400)
@@ -59,5 +65,13 @@ class LoginView(views.APIView):
         else:
             return Response({
                 'status': 'Unauthorized',
-                'message': 'Username/password combination invalid.'
+                'message': 'Username/password combination invalid.',
             }, status=status.HTTP_401_UNAUTHORIZED)
+
+class LogoutView(views.APIView):
+    permissions_classes = (permissions.IsAuthenticated,)
+
+    def post(self,request,format=None):
+        logout(request)
+
+        return Response({},status=status.HTTP_204_NO_CONTENT)

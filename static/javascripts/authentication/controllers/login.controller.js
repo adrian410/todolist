@@ -7,28 +7,19 @@
 
   angular
     .module('todolist.authentication.controllers')
-    .controller('RegisterController', RegisterController);
+    .controller('LoginController', LoginController);
 
-  RegisterController.$inject = ['$location', '$scope', 'Authentication'];
+  LoginController.$inject = ['$location', '$scope', 'Authentication'];
 
   /**
   * @namespace RegisterController
   */
-  function RegisterController($location, $scope, Authentication) {
+  function LoginController($location, $scope, Authentication) {
     var vm = this;
 
-    vm.register = register;
+    vm.login = login;
 
     activate();
-
-    /**
-    * @name register
-    * @desc Register a new user
-    * @memberOf thinkster.authentication.controllers.RegisterController
-    */
-    function register() {
-      Authentication.register(vm.email, vm.password, vm.username);
-    }
 
     /**
     * @name activate
@@ -42,6 +33,14 @@
       }
     }
 
+    /**
+    * @name login
+    * @desc Log the user in
+    * @memberOf thinkster.authentication.controllers.LoginController
+    */
+    function login(){
+        Authentication.login(vm.email,vm.password);
+    }
 
   }
 })();

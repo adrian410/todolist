@@ -17,8 +17,20 @@
       controller: 'RegisterController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/authentication/register.html'
-    }
-
-    ).otherwise('/');
+    }).when('/login',{
+      controller: 'LoginController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/authentication/login.html'
+    }).when('/logout',{
+      controller: 'NavbarController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/authentication/logout.html'
+    })
+    .when('/', {
+      controller: 'IndexController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/layout/index.html'
+    })
+    .otherwise('/');
   }
 })();

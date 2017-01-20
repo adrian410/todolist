@@ -24,9 +24,10 @@
       getAuthenticatedAccount: getAuthenticatedAccount,
       isAuthenticated: isAuthenticated,
       login: login,
-      register: register
+      register: register,
       setAuthenticatedAccount: setAuthenticatedAccount,
-      unauthenticate: unauthenticate
+      unauthenticate: unauthenticate,
+      logout : logout
     };
 
     return Authentication;
@@ -54,6 +55,7 @@
      * @memberOf thinkster.authentication.services.Authentication
      */
     function isAuthenticated() {
+    return false;
       return !!$cookies.authenticatedAccount;
     }
 
@@ -100,7 +102,26 @@
         username: username,
         password: password,
         email: email
-      });
+      }).then(registerSuccessFn,registerErrorFn);
+    }
+
+    /**
+      * @name registerSuccessFn
+      * @desc Log the new user in
+    */
+    function registerSuccessFn(data,status,headers,config){
+        console.log("register success");
+        console.log(data.data);
+        console.log("register success");
+        //Authentication.login(email,password);
+    }
+
+    /**
+      * @name registerErrorFn
+      * @desc Log "Epic failure!" to the console
+    */
+    function registerErrorFn(data,status,headers,config){
+        console.error("Epic failure !");
     }
 
     /**
@@ -131,6 +152,39 @@
    function loginErrorFn(data, status, headers, config) {
     console.error('Epic failure!');
    }
+
+
+   /**
+    * @name logout
+    * @desc Try to logout
+    * @returns {Promise}
+    * @memberOf todolist.authentication.services.Authentication
+    */
+   function logout(){
+      return $http.post('/api/v1/auth/logout/')
+        .then(logoutSuccessFn,logoutErrorFn);
+   }
+
+
+   /**
+   * @name logoutSuccessFn
+   * @desc Log "Epic failure!" to the console
+   */
+   function logoutSuccessFn(data, status, headers, config) {
+      Authentication.unauthenticate();
+      window.location = '/';
+   }
+
+   /**
+   * @name logoutErrorFn
+   * @desc Log "Epic failure!" to the console
+   */
+   function logoutErrorFn(data, status, headers, config) {
+    console.error('Epic failure!');
+   }
+
+
+
 
   }
 })();

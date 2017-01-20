@@ -5,7 +5,10 @@
     .module('todolist', [
       'todolist.config',
       'todolist.routes',
-      'todolist.authentication'
+      'todolist.authentication',
+      'todolist.layout',
+      'todolist.posts',
+      'todolist.utils')
     ]);
 
   angular
