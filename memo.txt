@@ -1,0 +1,26 @@
+apps=javascript/apps/
+
+1 -
+Create module
+apps/apps.module.js
+
+2 - Add module to project.js
+angular
+  .module('projet', [
+    'project.apps'
+  ]);
+
+3. Add javascript to index
+<script type="text/javascript" src="{% static 'javascripts/apps/apps.module.js' %}"></script>
+
+4. Create service ( redirection to routes python )
+apps/services/APP.service.js
+
+5. Add javascript to index
+<script type="text/javascript" src="{% static 'javascripts/apps/services/app.service.js' %}"></script>
+
+6. Add view template
+static/templates/apps/app.html
+
+7. Add controller with service inclued
+apps/controllers/app.controller.js

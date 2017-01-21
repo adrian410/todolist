@@ -55,7 +55,6 @@
      * @memberOf thinkster.authentication.services.Authentication
      */
     function isAuthenticated() {
-    return false;
       return !!$cookies.authenticatedAccount;
     }
 

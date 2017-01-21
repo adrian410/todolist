@@ -9,4 +9,7 @@
 
   angular
     .module('todolist.layout.controllers', []);
+
+  angular
+    .module('todolist.index.controllers', []);
 })();

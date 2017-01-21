@@ -8,7 +8,8 @@
       'todolist.authentication',
       'todolist.layout',
       'todolist.posts',
-      'todolist.utils')
+      'todolist.utils',
+      'todolist.profiles'
     ]);
 
   angular
